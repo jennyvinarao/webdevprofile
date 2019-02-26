@@ -1,0 +1,183 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+nav ul a,
+nav .brand-logo {
+  color: #444;
+}
+
+p {
+  line-height: 2rem;
+}
+
+.sidenav-trigger {
+  color: #26a69a;
+}
+
+.parallax-container {
+  min-height: 580px;
+  line-height: 0; 
+  height: auto;
+  color: rgba(255,255,255,.9);
+}
+  .parallax-container .section {
+    width: 100%;
+  }
+
+@media only screen and (max-width : 992px) {
+  .parallax-container .section {
+    position: absolute;
+    top: 40%;
+  }
+  #index-banner .section {
+    top: 10%;
+  }
+}
+
+@media only screen and (max-width : 600px) {
+  #index-banner .section {
+    top: 0;
+  }
+}
+
+.icon-block {
+  padding: 0 15px;
+  height: auto;
+}
+.icon-skills {
+  width: 10%;
+  height: 10%;
+  margin: 0px 2px;
+  padding: 2px;
+
+}
+.icon-block .material-icons {
+  font-size: inherit;
+}
+
+.caps1 {
+  background-image: url(../images/caps1.png);
+  background-position: cover;
+  background-size: 100% 100%;
+
+}
+
+footer.page-footer {
+  margin: 0;
+}
+
+.text{
+  display: inline-block;
+  font-size: 15vmin;
+  line-height: 1.205;
+}
+
+.text__first, .text__second{
+  position: relative;
+}
+
+.text__word{
+  opacity: 0;
+}
+
+.text__first-bg, .text__second-bg{
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+.text__first-bg{
+  background-color: #5fbff9;
+}
+
+.text__second-bg{
+  background-color: #f06543;
+}
+
+.text__second{
+  margin-left: 15vmin;
+}
+
+.restart{
+  position: absolute;
+  font-size: 12px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border: none;
+  border-bottom: 1px dotted grey;
+  padding: 0;
+  margin: 0 auto 2%;
+  cursor: pointer;
+  color: grey;
+}
+
+.typewriter h5 {
+  color: #ffff;
+  text-shadow: 4px 2px 5px #4a148c;
+  font-family: 'ZCOOL QingKe HuangYou', cursive;
+  font-size: 40px;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid orange; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation: 
+    typing 3.5s steps(30, end),
+    blink-caret .5s step-end infinite;
+}
+
+.aboutMe h5 {
+  color: #ffff;
+  text-shadow: 4px 2px 5px #4a148c;
+  font-family: 'ZCOOL QingKe HuangYou', cursive;
+  font-size: 2em;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid orange; /* The typwriter cursor */
+  white-space: wrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation: 
+    typing 2.5s steps(30, end),
+    blink-caret .5s step-end infinite;
+}
+
+.para-header {
+  color: #ffffff;
+  text-shadow: 4px 2px 5px #4a148c;
+  font-family: 'ZCOOL QingKe HuangYou', cursive;
+  font-size: 8  vmin;; 
+
+}
+
+.para-text {
+  color: #4a148c;
+  text-shadow: 2px -2px 5px #ffffff;
+  font-family: 'Acme', sans-serif;
+  font-size: 5vmin;
+  letter-spacing: .09em;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: purple }
+}

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<!-- saved from url=(0028)http://localhost:8000/users# -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="./User Dashboard_files/bootstrap.min.css">
+
+  	<script src="./User Dashboard_files/jquery.min.js.download"></script>
+  	<script src="./User Dashboard_files/popper.min.js.download"></script>
+  	<script src="./User Dashboard_files/bootstrap.min.js.download"></script>
+
+  	<link href="./User Dashboard_files/app.css" rel="stylesheet">
+
+  	
+	<title>User Dashboard
+</title>
+	<link rel="shortcut icon" href="http://localhost:8000/images/icon.png">
+</head>
+<body>
+	
+		<nav id="navBar" class="navbar  navbar-expand-lg navbar-dark">
+					<a class="navbar-brand" href="http://localhost:8000/admin"><img src="./User Dashboard_files/logo1.png"></a>
+				    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"><span class="navbar-toggler-icon"></span>
+				    </button>
+				    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+						<ul class="navbar-nav">
+					        <li class="nav-item active">
+						        <a class="nav-link" href="http://localhost:8000/admin">Study Hubs</a>
+					        </li>
+					        <li class="nav-item">
+						        <a class="nav-link" href="http://localhost:8000/users/">Accounts</a>
+					        </li>
+					        <li class="nav-item">
+					            <a class="nav-link" href="http://localhost:8000/admin/transactions">Transactions</a>
+					        </li>
+					        <li class="nav-item">
+					            <a class="nav-link active" href="http://localhost:8000/users#" id="logout">Logout</a>
+					        </li>    
+					    </ul>
+				    </div>
+				</nav>
+	
+	<div class="container">
+    <div class="row">
+
+<div class="col-md-12 col-sm-12 m-5">
+    <h3>All Accounts</h3>
+    <table class="table table-striped table-responsive">
+        <thead>
+            <tr>
+                <th scope="col">Customers ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">isAdmin?</th>
+                <th scope="col">isActive?</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody id="users">
+            
+        </tbody>
+    </table>
+    
+</div>
+
+    <script type="text/javascript">
+
+        fetch('http://localhost:3000/users/').then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            let user = data.data.users;
+            user.forEach(function(user) {
+                if (user.isActive == true && user.isAdmin == true) {
+                document.getElementById("users").innerHTML += `
+                <tr>
+                    <td>${user._id}</td>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.isAdmin}</td>
+                    <td>${user.isActive}</td>
+                    <td>
+                        <button class="btn btn-info disable-btn" id="${user._id}">Disable</button>
+                        <button class="btn btn-danger user-btn" id="${user._id}">Make User</button>
+                    </td>
+                </tr>
+                `    
+                }else if(user.isActive == false && user.isAdmin == false){
+                   document.getElementById("users").innerHTML += `
+                <tr>
+                    <td>${user._id}</td>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.isAdmin}</td>
+                    <td>${user.isActive}</td>
+                    <td>
+                        <button class="btn btn-info enable-btn" id="${user._id}">Enable</button>
+                        <button class="btn btn-danger admin-btn" id="${user._id}">Make Admin</button>
+                    </td>
+                </tr>
+                `     
+                }else if(user.isActive == false && user.isAdmin == true){
+                   document.getElementById("users").innerHTML += `
+                <tr>
+                    <td>${user._id}</td>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.isAdmin}</td>
+                    <td>${user.isActive}</td>
+                    <td>
+                        <button class="btn btn-info enable-btn" id="${user._id}">Enable</button>
+                        <button class="btn btn-danger user-btn" id="${user._id}">Make User</button>
+                    </td>
+                </tr>
+                `
+                }else if(user.isActive == true && user.isAdmin == false){
+                   document.getElementById("users").innerHTML += `
+                <tr>
+                    <td>${user._id}</td>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.isAdmin}</td>
+                    <td>${user.isActive}</td>
+                    <td>
+                        <button class="btn btn-info disable-btn" id="${user._id}">Disable</button>
+                        <button class="btn btn-danger admin-btn" id="${user._id}">Make Admin</button>
+                    </td>
+                </tr>
+                `
+                }else {
+                   document.getElementById("users").innerHTML += `
+                <tr>
+                    <td>${user._id}</td>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.isAdmin}</td>
+                    <td>${user.isActive}</td>
+                    <td>
+                        <p> NOT AVAILABLE</p>
+                    </td>
+                </tr>
+                `
+                }
+            });
+
+            //turn the upd-btn class into an array
+            let enableButtons = document.querySelectorAll('.enable-btn');
+
+            //turn the del-btn class into an array
+            let disableButtons = document.querySelectorAll('.disable-btn');
+
+            //turn the act-btn class into an array
+            let adminButtons = document.querySelectorAll('.admin-btn');
+
+            let userButtons = document.querySelectorAll('.user-btn');
+
+            //loop through the delButtons array to add an event listener and associate specific product id to each one
+            enableButtons.forEach(function(button) {
+                //add onclick event listener to every button
+                button.addEventListener('click', function() {
+                    let id = this.getAttribute('id')
+                    fetch(`http://localhost:3000/users/${id} `, {
+                        method: 'PUT', 
+                        headers: {
+                            "Access-Control-Request-Headers": "Content-Type, Access-Control-Request-Method, X-Requested-With, Authorization",
+                            "Content-Type": "application/json",
+                            "Access-Control-Request-Method": "PUT",
+                            "X-Requested-With": "XMLHttpRequest",
+                            "Authorization": "Bearer " + localStorage.getItem('token')
+                        },
+                        //instead of deleting availabilities, disable them
+                        body: JSON.stringify({
+                            "isActive": true
+                        }),
+                    })
+                    .then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(data) {
+                        window.alert(data.data.message);
+                        window.location.reload();
+                    })
+                    .catch(function(err) {
+                        console.log("Something went wrong!", err);
+                    });
+                });
+            });
+            //loop through the actButtons array to add an event listener and associate specific product id to each one
+            disableButtons.forEach(function(button) {
+                //add onclick event listener to every button
+                button.addEventListener('click', function() {
+                    let id = this.getAttribute('id')
+                    fetch(`http://localhost:3000/users/${id}`, {
+                        method: 'PUT', 
+                        headers: {
+                            "Access-Control-Request-Headers": "Content-Type, Access-Control-Request-Method, X-Requested-With, Authorization",
+                            "Content-Type": "application/json",
+                            "Access-Control-Request-Method": "PUT",
+                            "X-Requested-With": "XMLHttpRequest",
+                            "Authorization": "Bearer " + localStorage.getItem('token')
+                        },
+                        //instead of deleting availabilities, disable them
+                        body: JSON.stringify({
+                            "isActive": false
+                        }),
+                    })
+                    .then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(data) {
+                        window.alert(data.data.message);
+                        window.location.reload();
+                    })
+                    .catch(function(err) {
+                        console.log("Something went wrong!", err);
+                    });
+                });
+            });
+                        //loop through the actButtons array to add an event listener and associate specific product id to each one
+            adminButtons.forEach(function(button) {
+                //add onclick event listener to every button
+                button.addEventListener('click', function() {
+                    let id = this.getAttribute('id')
+                    fetch(`http://localhost:3000/users/${id}`, {
+                        method: 'PUT', 
+                        headers: {
+                            "Access-Control-Request-Headers": "Content-Type, Access-Control-Request-Method, X-Requested-With, Authorization",
+                            "Content-Type": "application/json",
+                            "Access-Control-Request-Method": "PUT",
+                            "X-Requested-With": "XMLHttpRequest",
+                            "Authorization": "Bearer " + localStorage.getItem('token')
+                        },
+                        //instead of deleting availabilities, disable them
+                        body: JSON.stringify({
+                            "isAdmin": true
+                        }),
+                    })
+                    .then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(data) {
+                        window.alert(data.data.message);
+                        window.location.reload();
+                    })
+                    .catch(function(err) {
+                        console.log("Something went wrong!", err);
+                    });
+                });
+            });
+                        //loop through the actButtons array to add an event listener and associate specific product id to each one
+            userButtons.forEach(function(button) {
+                //add onclick event listener to every button
+                button.addEventListener('click', function() {
+                    let id = this.getAttribute('id')
+                    fetch(`http://localhost:3000/users/${id}`, {
+                        method: 'PUT', 
+                        headers: {
+                            "Access-Control-Request-Headers": "Content-Type, Access-Control-Request-Method, X-Requested-With, Authorization",
+                            "Content-Type": "application/json",
+                            "Access-Control-Request-Method": "PUT",
+                            "X-Requested-With": "XMLHttpRequest",
+                            "Authorization": "Bearer " + localStorage.getItem('token')
+                        },
+                        //instead of deleting availabilities, disable them
+                        body: JSON.stringify({
+                            "isAdmin": true
+                        }),
+                    })
+                    .then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(data) {
+                        window.alert(data.data.message);
+                        window.location.reload();
+                    })
+                    .catch(function(err) {
+                        console.log("Something went wrong!", err);
+                    });
+                });
+            });
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
+
+        
+    </script>
+
+        
+            
+
+            
+        
+	
+	
+	<div class="footer-copyright bottom text-center text-light py-3">
+      <a href="http://localhost:8000/home">StudHub Cafe</a>©2019
+    </div>
+	<script src="./User Dashboard_files/scripts.js.download"></script>
+
+
+
+</div></div></body></html>

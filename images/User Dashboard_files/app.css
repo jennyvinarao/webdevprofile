@@ -1,0 +1,139 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.card-img-top {
+	width: 100%;
+	height: auto;
+}
+
+#myForm .btn {
+	margin-right: 20px;
+	float: left;
+}
+
+.card {
+	margin-bottom: 25px;
+}
+
+#addToCat {
+	padding: 10px;
+	background-color: blue;
+	border-radius: 10px;
+	text-decoration: none;
+	color: black;
+}
+
+/*#navBar {
+    font-size: 2em;
+}*/
+#navBar .navbar-nav {
+    text-transform: capitalize;
+    color: #5e0a71;
+    font-size: 1.5em;
+    transition: background-color .2s, color .2s;
+    
+    &:hover,
+    &:focus {
+        background-color: #5e0a71;
+        color: #fbf1fe;
+    }
+}
+#navBar .navbar-nav li.active > a {
+    background-color: #333;
+    color: #fff;
+}
+
+#topheader .navbar-nav li.active > a {
+    background-color: #333;
+    color: #fff;
+}
+
+html, body{
+    background-color: #000000;
+/*    background-image: url(../../images/Vanishing-Stripes.svg);
+    background-size: 100% 100%;
+    background-position: cover;
+    background-repeat: no-repeat;*/
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 200;
+    height: 100%;
+    margin: 0;
+/*    overflow: hidden;*/
+
+}
+
+.full-height {
+    height: 100%;
+}
+.card{
+    color:black;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.position-ref {
+    position: relative;
+}
+
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+
+.content {
+    text-align: center;
+    height: auto;
+    width: 100%;
+}
+
+.title {
+    font-size: 84px;
+    position: relative;
+}
+
+.links > a {
+    
+    color: #5226ab;
+    text-shadow: 2px -2px 3px #d1c0f1;
+    padding: 5px 25px;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.m-b-md {
+    margin-bottom: 30px;
+}
+
+#caption {
+    color: #5226ab;
+    text-shadow: 5px -2px 3px #d1c0f1; 
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+}
+
+.freebies {
+    width: 30px;
+    height: 25%;
+
+}
+
+.cHeader{
+     width: 30px;
+    height: 25%;
+}
+
+#datepicker{width:180px; margin: 0 20px 20px 20px;}
+#datepicker > span:hover{cursor: pointer;}
